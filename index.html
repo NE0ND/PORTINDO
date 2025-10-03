@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditia - Portofolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu li {
+            margin: 0.5rem 0;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        .nav-menu a:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        /* Hamburger animation to X */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(44.125deg) translate(2.5px, 10px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-44.125deg) translate(2.5px, -10px);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px; /* Add padding to account for fixed navbar */
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideUp 1s ease forwards;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease 0.3s forwards;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease 0.6s forwards;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-links a:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .content-section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 2rem;
+            margin: 0 0 2rem 0;
+        }
+        
+        .content-section .content {
+            padding: 0 2rem 2rem 2rem;
+        }
+        
+        /* About Section */
+        .about-content {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .skill-item {
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            margin: 0.5rem;
+            display: inline-block;
+            font-size: 0.9rem;
+            color: #333;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-year {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-links {
+            margin-top: 1rem;
+        }
+        
+        .project-links a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-links a:hover {
+            background: #5a6fd8;
+        }
+        
+        /* Experience & Education */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: #667eea;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+        
+        .timeline-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item .position {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item .year {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Certificates */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .certificate-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .certificate-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .certificate-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Modal for certificate images */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            opacity: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .modal-header {
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Testimonials */
+        .testimonials-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .testimonial {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .contact-item {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .contact-item i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .contact-item:hover i {
+            color: white;
+        }
+        
+        .contact-item h3,
+        .contact-item p {
+            color: inherit;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-item:hover h3,
+        .contact-item:hover p {
+            color: white;
+        }
+        
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                right: -300px;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(15px);
+                width: 280px;
+                height: auto;
+                max-height: 80vh;
+                text-align: left;
+                transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+                border-radius: 15px 0 0 15px;
+                padding: 2rem 1.5rem;
+                border-left: 3px solid #667eea;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 0.5rem 0;
+            }
+            
+            .nav-menu a {
+                padding: 0.8rem 1rem;
+                border-radius: 8px;
+                display: block;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-menu a:hover {
+                background: rgba(102, 126, 234, 0.1);
+                transform: translateX(5px);
+            }
+            
+            /* Mobile adjustments for hero section */
+            .hero {
+                padding-top: 90px; /* Increase padding for mobile */
+                min-height: calc(100vh - 20px); /* Adjust height to prevent overflow */
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Portofolio</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Skill</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#experience">Pengalaman</a></li>
+                <li><a href="#education">Pendidikan</a></li>
+                <li><a href="#certificates">Sertifikat</a></li>
+                <li><a href="#testimonials">Testimoni</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQBAgMBIgACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAEBQMGAAECB//EAEAQAAIBAwMCBAQEBAQEBQUAAAECAwAEEQUSITFBBhNRYRQicYEjkaGxMkLB0RVi4fAWJDNSB1NUcoIlc5KT0v/EABoBAAMBAQEBAAAAAAAAAAAAAAABAgMEBQb/xAAjEQACAgICAgMAAwAAAAAAAAAAAQIREiEDMRNBIlFhBDJS/9oADAMBAAIRAxEAPwD2OaytpiWkgjZiP4ivP51E9gfMDx3NxEBxtWTIP2Oa7v7yK0j3vgnGdu4A1A2o+ZIEt9m/+JklJUgZHT161nkiQjyZ1Py3G7/3Jn9q2zXIk/6Ubr3Ifb+hFZaTNPFveJo3/mUrRA707Ag+J25Ekcqf/DI/MV1HPE3Kuv7fpUwA9q5dVIO4Aj3FMDNw9a6PSoWt4j/IB9OK0tvsyVkkwexbP70AT1h7VBtmQ8SKw9GWtGWccGAMv+V8/ocUAECs70FJqUEDhJxNGT0zExB+4GKlN7bZI8+MEdicUWBOapxkB8ZzqBzuXn7LVtikWQEoysp6FTmqmEH/ABnct/nX9hSYFvHArYPGc/cVnUf6VCYzES6tiMDiPHSmBqW2ilx5in7HGaB1S/MIEVvIFfcPxXTciA+p+1RXutWoBjy/o20Hg9R+eKQ300+orKsatbJApMjlgM45Hfms5SoCXULW/topLldSi8yRg2MEcDsPypZZ6xNcybJI5nIkHMb53/bjH3rhNatbgwwRgyR5w27dxn0HTHfNR65YmIBhP5f8ykMcY4/lAJrN/hJqXVXhvQY/iY5ZCvmkpgsy8EkjJIpJr8099q73KyNONioCp5H2PPNTyvNbQiZIWd5H+Xy2wZEx2z+tJ727vJwqw25ZfMVtuCXGMjp361lOV0gstPh9Wsr+FbrOGkMm5s9Mc9utXjUNSe1tPiobaSSCPG1v+/PT7c15laJJf3lvDcwyhpQwQIGLJjg5A57VdfFFz/hui2Nnp43SMyfh+Z1VeTgk/wBa6I1QIHsNGGpXjT7rea3Y7nRgWUcg464Jp3YJatbLBbWtvHbEnajIMuPXA6fWqzPrs0Sx6fp8zwu/yuGjDqin+ZSO3T7U2tor7R7CW4VLWRyuS8k3zY7DvQnEY1bUjYzCGfaI24XB6Y6D3yP2Na0rUXvbtn3BY+VVTkE47kf76VXrT464Bna1E0m7ZCnnD5C382CAcdD+dNba3fToGmuBKEb/AKhgUyEcY4K5Pb0oTbehj+5uFhhL8HsOcc0OXN2oMdzF5brjaDz9iDQnxcTQArdyK0oyizRsp6ccEZzQmgx2i3hnkLm7ccqUbCkdSCeOeK0uwHlnZQ2sZWEEbupPzE/nU0USRs7KoG9tze9dqwboQaymBsDisrKygCm311B8arXVoCIlwnm5IcE8Y+oqCKYLJD5Kxu8z7UhmkP4a9cg/lVeiZSxMkkvYKXyQpAH5/SndnBb3MJa/itlgODDNGuxmweik9fpXDHkzYFvuHumgia1ZA+RvyNy4780ch/DBY596RyxBrTfp90ttNGpBbsfZl6UPbavGkiRfEB5XCl5ATt3dCMdq6nyKHYFjkfYpPJx6UM92u7YjpwMuTyVH0pDqeoTLdl7F3kPlljgcA1szWpGb+J5bjAOxFIIyOre9R5UwG/xEsUcsx/GUDIVBgn6CpRqVv5vlOxjfbuw4xSJdSljFtHHIueu3uAB3J7Uqvbx729DSyfOv4Yw6j8hj9/Ws5c9CZd57pIYhLgup6bOailvl+De4jXdhc7c4OcdKA028tTaxxuS8wGGTvnHOK3bj/lZvMmmjilHyo7Luj9hx++a2U8laGhVP4lkW7ieKzd4oxmVmU/L9KsVjcfH26TYBjbOQy80mjgiW0ljS7S53naryINyA8feoNK1HdObN5wk8kg4jXA2D9jURlToCxSabaOP+iEY55jO39qq0ERi8UTxxsQFkVASckAKPXrVlmvdkW6B4mCHDq7YP5+tVyOdBrtzeMCoDbyByQAOa2Yy1rHcDkTRye7Jj9jWpDcbcGBHHfD4/cUPaana3UK3NvdIYXTcAa6/xex2ZNymM7evenkhFR8USeXJ+LaX0bqd5KgMp57Y9s0ji16FxKHnVUKbdjn5vYH3x3q1+Jb2C4gFxDOhSLIDYyM+uf0+9UeGTlJIipJbIUjIH19c9axk0nsmyW4tEksVk0142ABOB1I78+tGx4ubLymkl8xwF8oP8pyOfT9u9JmW2WV08oBQ/zHbhlz796jlWW0dmsbucR5A3xsT+hyKwboVjC00lrxXEdwEkjOEEhzz2C4/eoPOeFWSBcTqfnkJGS3vRljBfm3PkXTuj9A8aMSR0+UAH0oWHTPEr3WbXTYGckNnDR5/Nj6ntScLHib0mG5nvopRe3DXLE7AgGdxAGOe3FG6pLeXsxfgtGRGkcnRwuBg7eQM55oe3j1S2vljaze3uIslyJRJz7BVB7UbZgQXRFxa6mZtodY+EycdQME/r+VaJNIaixtciKytElBS5ZVO3zQOT2AYex/0quLcXTQFZ7k+VncETB2+nJ5qafXFmtWt4rK8RQoXZNETkD1wPbrQVjZyak2YZU2kZCqeBzjB9KUot9A0xx4f1KY3yQpcPy4/ElGFBx0GKte+UI6RTIzKSVSLG4g47du/WqlpKXUSXdpb6TBLKsg3SSgny+w7+uTTQS3UyFr6FZJsEMqjB4H8pHcYrTjTiqBIb2+mp5PnT3Bhu1fIzz5Z9Md/rTe3k85nRoY5GTguDw3vz0pLplhBCEvJ5p1jPPlznJXPbnOR7jn3pu+p2cAMSygSDjbtPWtUgQVvgtjgAL7AdTUdxdIkIY79xONvAOc+9JrLUDfXbRy3cu2OTY0YiCqSenfNMTAbW6D72EO7OQMnp3z29xVIYwUfKMk5xWVoMCAQQQe9ZTA8lN759okRyWklxHtPzcnAIx1/0pjKscaqupRTvZoABhtoLAcY9COtIbGbyLwTJGz+XHgAdien6elMrjVDcRv8AHBZD5Rjj3Fsg59B2ry6S6IWh5/ibWWmJBL5F1EwKoXbJGMcHHNJ7rUXnUFYEhMZysigc8YNV6O53SEfKU42Nxn0/vTPbcIkkG6MpGBM++QKw9Pr9KUrl2DYxstWuY75FjunVmIGWAAYE45HtT3XIngRLt2DSnkujfK2OenbpVXmD3eq20+xkjmCxgSNwQOuG9PerTLr1tbtBZ+TbeWmcbmyF9Oe/bmtYqKjsaF2nXoOoBpEjEbJ8ythVIJz3rjUJYtQnlRbiG1iQhohj5jx6iuJboAO5vIGjDFtiDO2tPqrhJGdQQAEAQKysvv8A3rFci6CwXRrk27edc+d5atxknf7Hp0qw2Vz8aEkmzcLHli6KW5PTj1pTp88d7eyfEwAQJy7KMBsdgO+acWd68jtHbD4e0t8RqVUEufRf70QTsuEMgCfT9QmUvYRFULKTvyhwDk8UfaWsQvYhdQzSfIUEwCgL+XoST967uNRa7aYRJMLWD5ZZCcmRj0XI6CkNzrkfxHw6CEpD87rux838o/Pn7VvDTNPGWLUbdrFEMF7DJEspaU3AB4PY9j9KGEC2lzJPLICs7nylVeenp2qtXuph57W1gaKd1YTyHeGXPv261l74sjGt27D8WSIEoxOV3d+O9a5MMEW6+sbKINdXKbPlUDyxtwB2A6ZJpVd2Ud5Gk3ntBFFwF4JBOOfzpUfE8Wq6iEvruMW8EAZc4wrnjJ98Uxj1GziASCQSANvZuuazcvwqMESaXYnTysPxrXcDR7fJMY25z371xeeForaUtp8/lmRjlRuOM9ec0q0++muZ59UL74onIQScKi+v3zR194mlW38xAXnlXamc7UHrS70xPjTI4PCcomdprsHBy3lAbhjtzTOG00sJHELeWZkO2ON3OOfXGKrNlrF3I8kcLGKBTzJ3c/XtXZ1tba21C6w0uCBHMz53v0AFC+g8SC/GWhxoYr3S5Tb64uB5dux/EXpgAdx696R2/iPxDqwj0yO5KTxYS4umXDov83vkDr9ac+HpYrS1GpX90011MM5fIC8cKOvWmtpp8F1M9w11ZRTXDD4mFGXfuxgA88fSuiDVilGkC+ULGwks9HSScDLEGQqJj33lfmJ+lA6bpd7dX+yC1to1JBZo1l3Kf/mTkdfSrY/hh4UMi3oCxtvUKgyMds13/wAXeGrVZCuqWsksYAMKSDeB6Ad+aHHJgpUV2eW4g1GSSawZjGctNBPsYnoV2+vr0qaPSrfxBo7avpskttOejzLs8/n+FweMds1Yjq2h6hOBZXVjLf8AVeVLr681Mtk72kiXN2yqQd5LcAD9qUU0wbspGjw6ZHpUjpaXcd7HKRdeVcyRkEHpw2MYNcNrM/xKJod1LCgTaWnIk3Mf8xGfbrW7zRbKC/cQ3Nw4uCB5CvtU4AyTjliaDl04LIfNiFvIv8qOScDgHHJ6c1Mp1KiZNUO7PUbvzIprh7WadkJZGjYZOBwcH1z2oy08RT5Ml1YROqOWVopiAOOmCP0NJLZ5ChimbdGwAyV54rGZVD7Mn6cV0cUG+zF8haR4u00SCRtKuVkP8/lKSfyNc3njW2DKYUnjILbllhYbhjjnHrVYU4UNyW7D7Vh3S8Ouwn0Jro8aRLmxqfHxyfx4B7YNZSoQW2OWfNbp4oWTFZaJbdHlcjA3AD+IAcDP5VBJcxSK8eWc53ZDcigjcRzloEmMca/KCBuwO2Rxnis+FRpAWlBBIyS3T3/3mvDUVYUSSLbKy4wx3clmP+xRUdxAs0bozBF24Epz9f2pbcSQxzCIqWj6b88g+w9KYadcRRwGOVYp4SwIEnysPpQ/woO+KEt4gjkWKMhkAZcIu7rj0+1A3vnW8727yJ58bCP5X3DH19KJUpJjCQjbn5FOePzoK9eCK8XMZZwQ6HkKpznBHenGXpjJZZElb8MuSflPpn0x71HcyGIrCEKqgHyqf4T/AFqSe5DRyMsMQLY+cg7hQ0FwkSp5MKu2zlnGSSfQYpNU7J9jTTNUewtLrzJHyGEjZ5O3GcZ9eaittZuY7K2gTyxc3TEhmkz5ak56dqq88twbK6XYVO912A9sj+mK4lvY4JtOlfcAkSFz16iupQs64ukXXUtTaDSZjBefLDGT5cY4ye/uaqGk3nlRTzOfmfALevc4ppdTQXFpLDEuFeMgH19P2qvaZMnwKgrna7A/pU8f9WaMl065kke5uDku7hVGf5R2rm3u/iNT3BtuwFQf0zQthKFtLtjw8ZOOfWg7GYRQzTOSccAVso2ZN7DzKZhf7PnRmAznqB0qXTtQubqe3giIXbnJ9eOtBWFw0Mg3kYaMllI6k1DZ3DW887jhlBwfvTSVCZaX1lbfw3DaI4bzJcHB/hGev3ximcupSJaS3LIiiNPkBHWqS/OjIc4YKGPuc0Tf3jzxW1qHYGTbuB/37Vk4W9GilQ5m1NrTQl+bbJt6dcseev3oGXy1gstOtwUl+WS4c0BqsyXM0VoiYx/1DnsP9Ki1C923mbc4YnfI45P0qowE5F70y5S61uECOY29qpdsZCuccdvWmV1q1tay3N3cQPdJI6bIFAbYc9W47cHFUbSbiWHSJrmWV3aaThS3OPTr9aG1O6lsppYJZjGZFVwFPykEd/fpVQjUiZPRer7x/dwK7RybJFbKQvAQAPZh0+nNeb63LbXuoPcWy+U0rFn+YOM56jgVzLJIwyfNY/5M4I/2KDkhm/jMcgX3FbxozLp4YeHQ8zQFS8oAMrAbvoORivRbHWviLIRB4WlZQQ+/gY7H3PP5V4hbyLCPxDI4IJ25PHoenaix4lntY2htAFVs5JyfuKKbGeu6pq9m9+zeYSIvlKxhchsdM/09qA+IuZ3V5I5IoNxxJnkjoDx+1Vnw7ZTRaGRcBzPcS+c27gjdjb+ik/enluhtxtaTMWDl3foew47VxckH5LM5SGKyRyM7FzsBCh2Gc/lWNApL7eRntQ8cbOxEeByA248A+lZc+dbuFDgjcSOetdvD+MxYVapbQtvmAkXGNhYgj3qTWL6zhjU2kQYDk7l6j0oCNskZwzGpoLcT7y6YKjJLD+Gq5Fa7AUNqiliUEQXPAaPkD35rKmZY1YgXFuQD1MSk/vWq4af+hCu80jViRJNaSgrHkhITkp2PSgvgdRkIWGym2r28tuK9btZpcBfOckLwrDDYPXpww9xzVc8TeKRZQqsUztcNmN0VtwjOMqwP6Y7g+orjXLm6SOhwSRUGtruwCM8kakjPlEFjgc+nWt/HfEl5ri43EABfl5z9PagDezSyeZK7OwY8udxP++aIfyJoQBvSYDJGQ2PzraiK2EbRF80cjxg/wEjpRu2yliD39xIylRiSEYPH2pYLlVgEKocAfMWbP5elcCZQmUG0HG75OCcjrRhYE06CNmNu8piL4WRj82Md6iW5FuxlkdWCJkL7+tTugl2RxtI0kgz5UfNQajYyW0M8klv5C+XkGTGWzxTj2kEVsF06WKaR5FYuGfDA9eneld+FkvrmBTlVhBTPtzTayjxpqsUVZgzNnoWXNJkTOvnefk8rJNdCdTs6l1QTpN+8kO1wCYm2/UVHaDZLfwKwGCJB+ua3Yw/DPeNJwpk+T3rmwkQXc9zNwko2jNJVspgIby7meDtKoP3x/rQ9qhIkt3z1yea2riXUmZSSFJGfaukOdUI/y9PtWq0ZdsyJhJdsM/KEA+9aVfMkl7ZOP3qO3zHeMrdzipYy0d6yMDhxkUDo08rtaCHHAX9jXUbtNcmRjjy0yB711MqqPMX1DEfvWQqBNMvTcM/YiiwZu1YwwveOAzyA4z25xQbKVtvNf+OVv0qeRv8A6YgXvwfzqe9g326RDG5MYFF0I1Hcv8GFXjA+Xnpis1+Y3fw0pHLQp9+BQbFoGSJx03Zoq4jWbTLd4m3GEMrfQnI/LpVV7B9URXF+72sMcRdWAye3rQq3dyCPxpM+7UfHJa3cUMMxMckQ2hyOoqN7azXGLgHI/KrTJJdPvZjY3iLEZSY2BbPK5GPyrPDGltqmoJCWCoBlt3p7VLYzQ2kDpBG8juCpYDgntR3homxvjdSIAFUgLjnJ9KMtDPRLgW7SFZd/kghQgfBZQFAOR9DWSz6fZxvL5IkLELvCl9o/QZNJJJrqQJcNIUhLFRhhg8DPHfrW3mFpY+UW3eZlVYtjqQQDjtn1PpXmTcsjNv5FmS5t5Y0RoCksigt+Hjyz6HJ55pa8cVvcNHIHOwkuWHT3oW1vlSUWc0iZhwhdDklj+X6imRW4uGe3lkZ45DhJQcNEff1HqOlVHmcNJkS2zmL4V3DJK4QjrtByD71O8isVtJZnEO/IdWwy9euetLbW2lQyQ+d/zSNhhnPTvg01No99GzSBxOg2qyMFB9+lU/5Da2JIUtY2ikhbeFgOAWQ5P1rVaK6kpIbTlZhwW2A59+tZU3EeIw1nWLgWqRWJsbtJ87Tath+D1C9m9CMVV5vDeu3V55tto988TN+IXIDc8k8kZNehJc6dptxJm1jjYvv84qoZz3IIoO78d2nnRC1Sd4mH4rDgoc8YPes+Jxh0XJlLHhbxBAW3aPctHjnbtJzj65oO6tPJlSOSK5imIyYWUgg/vjAr0zw7ql3rtysVqSEXcZ5GABQZ+X6k/wBKt82l2l3bfDX0CXadxMoauiCc99DSPEdMiiljeKaBGJDFZJjwgzR1xa27W6g3IDIMg5O0jjPFWLxd4Lj0+GS+07Pww/6kBP8A0+eo9qoMk3lbolC787R2z0/SsZ8clKidoZWcwt4gLWbJA/iRAM9PbmleupJPZus00zSSMpXk9B60UJpVRhsKoBwE6FqV3jzReU2PMhaYlgvUYHT9auEHdlRjbGdrbSrp1rGWeWaMfMpTjB5/rSQ28sGo3fxIwWA2kdApGR/b6g07urpZZdyrKhOMp3B46en0obV3Etj8SvmyGJCJGkUD6cfc1ae9lQlUhQt2q2ZlblW7H1zQ2pt/ydt5Zx5j8/SoZodmmRb2HzsAAO9TayoSO1CdFfH6Voo00bN2qA7e1dp5YxuAXGcdanitlFwHTdwOVcYNML+GWzl+LjG3zQNxHbA/rVm8I6HDfaFc6tq4MjyK7RBjjYv8rfU9fpitck1Zk/iUuSzefLNlJcDBx1rcu6WMOiFbmA/MnXIq3fA2y3Gy8lj8sN8qEHe4I4xjgD3oSLSopbyIMDsUESuhHAxwfvxWS5o2SuRNiJtl3ZbohyQTtxgg/wC81AimW2jmjOWUbJB3NOn0aGJ2kjvFQMu4qgBxz3x07frU8GhDEciKSHYFiODg8H9qpcsSnJFdnhZNNcYyF+Ze3euL8+XcW0vOGAqw6jo6C0uPJLBdzbBIeSoqs3j77SyPXZ8ppRakO1WjrVVxIgY/lU1rH+AFDhZMEMrdMZrjVgXWGXoORxU8lk8jQMhKgqCMHFaJ6BokNvbTZR0MT99vai1sbOO2WRXG0ZzyOajEfw9jlSrMT1ODu5ozSx5yuqQq5IGAyA8/tmpnJxE3qzlHim+WKMMM4y3AU9M1qTS71gjSxS+WHwWRCVXHv0ppdwRXFzN/h0jKg+fZIMgLx1NS290IpBFK7TSeW0pRTwMY7d+CaxfLL0ZuVmtILzxzWsnzhR8ny/wqf2HFERJFbpJCy9VG/djgehH07dqItxPIZQ2nhYB0klcoxz1I7k8fb1rjy9OsrbZquoGFQ25opXIO71wvJyKnxyk0Ls70+ytzdIbRIygbLOhJU/Uc1YsI+S+ACMlo/mOao2peKrC1iWHQLeVWXo7xhUI+g5P1NJ31TWtdLbtQc7cAQnKjHc8Dt1NU/wCCpSUmx4nod3q+jRTRXWoXEUd0ibShOWPpkDmq9q/jlEnU6XC0jJuGZz8rA99o7134G/8ADuTX5mutSulWyQjd5J3bz/2h+n1r1+x8KeHrC38i30mz8s9Q0Yct9zXRhBOx1R4V/wAc63/6hP8A9A/tWV73/wAOaH20mzA7ARCtVeg2VKN2kdY05VhnDDBx06UNf6FBchtsEaTZAyR8pXOTyKmmW3t51awlQoykESuTjntjNTRtISHYQl8443qPrmvm9x6YUc+AxJYaZPFNEYbjzyJAf5gAMEHv1NWiO8KH+Lr71V3vJbMmba8oAOUUBgfv2+4pW/jWAvtOn3Q6cLtOP1r1OLlk4o0i4Ls9DnuIp7KeO4wY2jYMSegxXgNyX/FL5+aPA+o71dPEfjANpxtLSCeN54yGMi7SF74qnzTRyQh/KUuwwVPc8cZrVty2KVegmS5jWERK6uHXGcEFTjr96Uvcx2t1bW80pDA7txHB3MOv2X9aJRFlQODtdYyNrfUcY+1RQpA2qgXewupAGTkg+lONExHj2sguria4PlW7z7g7gZYeoHU0Lf28LQzBXZ0dTnaMD0HHrRE1w07zmMCUuxG5zj+Ufp/alsatkr54STP8pzj7VjtyM22mINZbyhaRKPljfBNdavsexSVW3FZMkelG+ILJblXmtMuyr86HPUdWpVbt51hIrdVzkdz6V0qnFUbwlY61W+jl8PiWPLBwox3HrXp1uYZNKvPglAtxBiMAfy7RgflgV4nG7f4Pt/izMP2r1zw5OIvDNy8xYLDHnd/lPQ0JYqg5HaK7dRCBgj4aM/wt3XnNQxBppDZhikRO7c5ON2MZI+2KbyrHM7QTkYP8Ddj6Gli7rWQxPgE937VzTj7Rxp70dXNvHFGBEg3j5mIA5/LrXM7EXNvJN/ACCFUHt+mfY8cUZZ2zXKNepsSGP5SrHBkx7Uw1i4tre2cRySiUgbIl2iMDHQj+uacISqzRCERNBPG1yMwyfiEpjCggHH64x7VTrmz2Xk9mGJjjmLIfVCeP0xVqa4kcqW2ZIOV/i7+nalfiK1SOK3vo/lZHCSDfn0xxgf7NVxt3RUHTFOrOGMNnGNzLyT7ngU+uoki0q16lwpB+wFV2Eo+qu/8AEFXcP0/vTjS7t9VultApwikBe/PU1vjtHQByzi5tmMXzhnCgAdD1P71YtLglTT2dGCJNjDN7HHTv9qq1grWxeOXGYGbcPVs4/wBaa2Woa5dQx21osVvHAoVX2AEjpkE/0qnDJ0Q+ixva6bCsqXVyIUHyuZZNoOCMEcA0Fe+JdOsERdLR7iRD8hCBUPHI55Oc0utfCmoX92zajLGWznc8mXI5/L6k0zj0aPSZJ4gtgoZCq7JmkJbr8zHoMdgfzq48cYkKNCqXXNY1dPIE0VuWOBGvDN7k9h261Ha+HzPJLJqGpwJIiZceZ5jFexLdAPzNM7WP8dpkjtUVW/iZ2CkD36nnPbimKSNEplnNjHPgn5ywwD0xjt9RzWhQtsrOKx8xkuLYxZ2tIMY3HoNxPp2HHvTKweGxtGn+PsYVdj5EjQEg45bC5+b8/pR0El1BbI0Oo6ZbyOoDCWLcxc9MKD+maivZdSt4lhGo2EXmEqxdA8sj9wAD8vHvxSbEj0jSLry9LtkR1I8tW3Bdu7POcUcly4OMg84pBolws1jGjvG8sSAMI23fSmEbPhckqB/EPeuOU2mbKKoai9fA5FZSj4lR/P8ApWUvI/sMUVPTiZ7pY5bySAiIb/NiAdeejHBz7EVaLZdCgG641GSRged0jAfkKo48R20CiGMtB5S+UFWZhtA7c81KniaIgj4qY5P/AJ5/tUR4IrbRy5tF8lk8Nzp5b3MZVhjJdv3pNL4W8MSyEw6pNG3U7bkHH5g1Wl1a2uZlR7kAHu4RgPzFRNGjh8X0LoWGFMKEY49Oa3UYr0HZYrnwPo2pGPzdfldkUqp3RHAJ+gpTqv8A4cXMGG0y9S/gJHmISEkGOhGMg/2zS2OJ0xHbzQYQHnyT+vNGQ3F4PmS6hJC5wgdD/WqpUNCqaynsrS6kFtMLWIgzTXKlAcd+cc89qX+HNGuNe1OaW22ptXezPwPmPHXvxW9V3Tawr69qk89l8xMMTMxiyBwM8Hn2q7afcaVpFjAmmw+VEVzI4b8Q/wCYnqSfeufk+C/SkkBnweYZXWS/XJzswNoJ+v8ASq5rum2ujR+YtzLNLkFkeDZlc4O0/WrPd6rb3N0IIyZpklKxTJGMNjkqSODjita3q+l3Nr8PNNE05A2gIXAOA2PdTxx71zQlPNWPRRYry2V1PmSMCeP5PrxjnmlVzAnnC7gbcZN4cAYBOAfz5NPVuVTR/gniCbJA8JdR+H6g8ck+ppdfCO3slkjbJWdCQF2jlWB/37V2w70Jd6EkiOtkkQRm2y5Yr7ivT/D3mnQp4i/lh1aMiRcgDAIJz+VVPwqXmuJILhFEO/c0pXhQP9mmupeJR5xigjjFv5ZTJfBAIIyB0z0rbDI0bGMMEwscSJBIwx5TQS7wy47cdRzUFwfirTzht3xjDH29aSW2uS2sbW8LxvEW3g5wVbtindrqFnNZJdzykTYKXCbgvzep9azlxP0YSh9ENleSSW/wh5CZYBRgt65/SiNZgV1HysGwCWyABx+tKpdc0qxlcWZaQquCY8gkdSM9h06UqbxJqV6DBaQrGm4YdE59Blzx0xWkINKhxgx0IrKBQbyaNdo3eZnbkHt/X7Gode1vQmsrqzgi+Jmmj2iVE2qrY4O48nBpKLOSW7jXUBePNMwEb7WAH09evUcVLDo9nBOqSx3Uqg7vLlgZOPQDqTirUEtjxFMMQMJlXmQRkEL3orwoZEuJ5UJDbFA9eetHXumxxFprCK4+GU7HEiMNue4z0Hah9BspBHeTRthF2qrd8gkn96lqy09jOTTnfVrWYW8kq3hWR1Hy5IzuXJ6Z25+9ObO1lmuJf8N0II6NteXerEg8kbycZ9hQ0V1Ba+SoZjbyKQQyklSc9/yoKa8mi861MkskMEZZ4VnZPNQckAjoetVDQMZQadLa+bP/AIOtwwUhlM67I8dM5IB/X6VFaNDHZPJNolvdO43O0pHlxseAAnTP05NHTNp80kchlvzFsWTdlvJK44AUcE+2agMukvN8TaS6iwhBZ/ML7Of5VUAc9OlUwRLa+TKiRvosNxhwqO8akRg8nYmPXHGKNv7F7i4jiHhy3V2yGmZklmIB4wcfKOvYY6UlWbTmnPw1zqmIU2y+c7FufTjNGWa20U0l3CurSRuoVnkaQs+OmMjAxj3qW9Cbo7lLWV6i32kpHcKu8FXV5WPQDdjjjqf2o1dM1G5dLqTw1CnlndHHDtDSt/7+SB796K0nxHp+kM7Wnh6Rp5Dl5p5Gklb6swJ+3SnS+P5l/h0SVcj+Unn9KnMnMpPieHUYEt2sNAuLGXefN+CiwzY/7mU/MOTS2y1LxOrjy7bxAdp/iNvI+PzBr0tPFqToUk0S5IzuIyf7VNZeIII5Plsb9ZDnC/MR09qhuLFnZR11/wAR7Rm31Xp304//AM1urw3iu7DEGzwQemySsqcYiyPMNVs0hj8/yJBvO7e2SHz7+uaUGVM42AfbmvTbrUPEU6bLrQ4pF/7RIhH5Zpe8d3IfxPC4JPoq0lozbPPxPFGS7xFwB/DnrQsut2DHHwDj/wCQr0fyoI/muvCkh45xFkV2J9AUhJvChU4/9M39qtV7Ls8xOqWZyVhuFPsRXA1aDsLkDHRXI/rXqIm8KA/ieF39/wABv7VjN4GfIbQWX38oj+lO4lJoqnhixSWSO+u186yKZ8iRt5fP+X14NXqWzgMOLXYhllBXPyiMEcjgcdqyzuPB1uFEEMsCg9Np/tRIv/C75RNVML4B+dVyPzrl5uOc3aLjNIQXemT2ZabIjkzkFWwoX13Y4HsOar0+n3LThLKGSUgFzKqsq889fv1NegTjTZULR+IAcjguOP0NBS2FvOQI9Xgk7gMD/eq44NL5EymUOTT9QbKzLEoB3AGYEfpmi9PsYFsrldSu4XnfHkxgSFE9STs60/vdGugQIDDMp4G2QDH50pn0q/UkfD5xwCrA1stE2yF7a7lsUt4NR04qCSVeYxgntyV7UhuPDOvEnyoYbgZPENxG3H3Ip7Jpt+pBa1fHHTH964WxvhhxZzDnGQKtTaHkVaTw/rSly+nyIR1LOox+uKMstBvJJTBdsvlEbsxyK5z9BnH+8Zqzp/jCLhI7nBxkEcfka6eDUsnzNMXk5z5IBP5YozZWSK9Z6NAl06NfwLGpUMshGeei4PX9unNNWFnZyCW21kNHyq7YgqbuhYLjr7nGcelGiC7jDyNZXAMoAY4LYAPbIPWuXNyuEKxJD/2PAwJ9twyatTQskcWyCFp7y712NJ5QpX5d82OgAHG0H0zUUV7cI/k2d4kdzLkPLIV3N9TnCgf7zUF8t/dRxK0FkkcCZCRvhnOeeqgihrqS6sbwT2Wmo0q4w7IJCpHf0J96eSKyQ71mO50rSYLh9QjuEnlwLZEKrJgZLbv5hnHOMe5qqyauiDZaR+Upbc7bujVvW9f1nU4BHqZdvLywZkx9hxVakny3YexNNUwGNxeSyyERvtHQktnd71NYI8lxuFwPMxgn17UnEh7GjLacxbGypY4wCOtUFl90cSwabJIupQWwtm/DeUF2AxyFUYI+tBw3WoEfFRXwWYsR5rs25s9MAZKjrxUcLaddW6iZGM7nLjaM/QZPtxUiPpVxi3ttKukuEHnTzyRsGQDsAcDPvUMoYS32p6DZRXc5RpLgbSFk/GY4zvYjJA4wOarYvFuZmlnWUs/8TNIxJo5pdOnkSV/OgZCJJJGicsew2g8Z69aFvRb3FxdXFkxa2TBO7qv9/fHFZtESRCHtiWxaFvrIwoiFo24NvsHr5rUvEo42t2B6VjSDjJpEMaCO0AP4UilhziY1uNo4JEkiSQ4cHAmxn6/l+tLEkU9WxU8AV5FAYFS3zCpsVHpscto8asJ51yAcfEjisqlBNLAALzf/AIGspWTaBRq2oRL8l1IPvUya/qiji8k/OtVlAEieIdWxj46Xp61JD4n1hGOLxz9aysoQEq+Lta4Hxhwc9q6j8Xaz8q/FcY/7RW6ymMYW3ivV9qkzqTnPKCnEOvXF0ubi3s5Djq0IJrKygDUzWl2yLPpenncQCRBg/vUaeH9JuN7fBJEwJ5iZl7/WsrKktFe1PT1spwlvc3IUrnBkz/SgZBMqI3xdwfYsP7VlZViYJJqd7EWK3L8EdTUM3iDUkjUrOQcmsrKRBEfEWp78G4JG3PNEW/iXVBk/EEnjrWVlAhhB4o1ZlH/MkfSj4/E+qKV/GDf+4ZrKyk+gYfHr964O9YGwe8YNNEvBKQZLS1J/+1WVlCEFwmGWJfMs7Y5H/l1s6JpN0PxtNtjn0UisrKpAmRN4F8NXDHfpUXTqCw/rXUH/AIaeF5CT8EykDja9arKs0iwOTwHolrKhiW44YMA0xIyK1PYC2mlu4rib4mRg3mttJXBHABGMfasrKbNIm7nRbaS5uJriSa4fMewzMG8vIydvFdalplrBo11cFPMkVHRN+MIMdgMDPvWVlIpnks7FX2LwoHSoRK/HT8qyspGT6OXuXTGMflTbQD52pQBwMb+lZWVEhei8/B2//lLWVlZUGR//2Q=="= alt="Profile" class="profile-img">
+            <h1>Aditia Dwi Irawan</h1>
+            <p>Fullstack Developer | Mobile App Developer | Cyber Security</p>
+            <div class="social-links">
+                <a href="aditiathegreat@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://github.com/NE0ND" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/aditia-dwi-irawan-792994292/" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://website.com" target="_blank" title="Website">
+                    <i class="fas fa-globe"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="content-section fade-in">
+            <h2>Tentang Saya</h2>
+            <div class="content">
+                <div class="about-content">
+                    <p>Saya seorang programmer dengan fokus pada pengembangan aplikasi mobile menggunakan Flutter dan backend dengan Node.js. Berpengalaman dalam membangun sistem CBT anti-cheat dan memiliki minat pada pengembangan software berbasis AI. Saya selalu bersemangat untuk belajar teknologi baru dan menghadapi tantangan dalam dunia programming.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="content-section fade-in">
+            <h2>Keahlian</h2>
+            <div class="content">
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-code"></i> Bahasa Pemrograman</h3>
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">JavaScript</div>
+                        <div class="skill-item">Dart</div>
+                        <div class="skill-item">C++</div>
+                        <div class="skill-item">Java</div>
+                        <div class="skill-item">PHP</div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-tools"></i> Framework/Library</h3>
+                        <div class="skill-item">Flutter</div>
+                        <div class="skill-item">React</div>
+                        <div class="skill-item">Express.js</div>
+                        <div class="skill-item">Django</div>
+                        <div class="skill-item">Laravel</div>
+                        <div class="skill-item">Vue.js</div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-database"></i> Database</h3>
+                        <div class="skill-item">MySQL</div>
+                        <div class="skill-item">MongoDB</div>
+                        <div class="skill-item">Firebase</div>
+                        <div class="skill-item">PostgreSQL</div>
+                        <div class="skill-item">SQLite</div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-wrench"></i> Tools</h3>
+                        <div class="skill-item">Git/GitHub</div>
+                        <div class="skill-item">Linux</div>
+                        <div class="skill-item">Postman</div>
+                        <div class="skill-item">VS Code</div>
+                        <div class="skill-item">Android Studio</div>
+                        <div class="skill-item">Figma</div>
+                        <div class="skill-item">Docker</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="content-section fade-in">
+            <h2>Proyek Unggulan</h2>
+            <div class="content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Aplikasi CBT Anti-Cheat</h3>
+                            <div class="project-year">2025</div>
+                            <p>Ujian online berbasis Flutter dengan deteksi split-screen, auto logout, dan monitoring real-time untuk mencegah kecurangan selama ujian.</p>
+                            <p><strong>Peran:</strong> Fullstack Developer (Flutter + Firebase)</p>
+                            <div class="project-links">
+                                <a href="https://cbt-demo.example.com" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Coba
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>E-Commerce Mobile App</h3>
+                            <div class="project-year">2024</div>
+                            <p>Aplikasi e-commerce lengkap dengan fitur cart, payment gateway, dan admin panel menggunakan Flutter dan Node.js backend.</p>
+                            <p><strong>Peran:</strong> Mobile Developer</p>
+                            <div class="project-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.example.ecommerce" target="_blank">
+                                    <i class="fab fa-google-play"></i> Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>AI Chatbot Assistant</h3>
+                            <div class="project-year">2024</div>
+                            <p>Chatbot berbasis AI menggunakan Python dan Natural Language Processing untuk membantu customer service otomatis.</p>
+                            <p><strong>Peran:</strong> AI Developer</p>
+                            <div class="project-links">
+                                <a href="https://chatbot-demo.example.com" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Coba
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Company Profile Website</h3>
+                            <div class="project-year">2023</div>
+                            <p>Website company profile responsif dengan CMS admin untuk mengelola konten, dibuat menggunakan Laravel dan MySQL.</p>
+                            <p><strong>Peran:</strong> Web Developer</p>
+                            <div class="project-links">
+                                <a href="https://company-profile.example.com" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Coba
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="content-section fade-in">
+            <h2>Pengalaman Kerja</h2>
+            <div class="content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Central Intelligence Agency</h3>
+                        <div class="position">Cyber Security</div>
+                        <div class="year">2023 - Sekarang</div>
+                        <p>Melakukan penetrasi keamanan sistem dan menyelidiki sindikat dalam dunia digital.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>National Security Agency</h3>
+                        <div class="position">Cyber Security</div>
+                        <div class="year">2021-2022</div>
+                        <p>Mengumpulkan dan menganalisis intelijen sinyal (SIGINT) serta menjaga keamanan siber.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Startup Edukasi Indonesia</h3>
+                        <div class="position">Mobile App Developer dan Fullstack Developer</div>
+                        <div class="year">2022</div>
+                        <p>Mengembangkan fitur-fitur mobile app dan website untuk edukasi menggunakan Flutter. Mempelajari proses development dari planning hingga deployment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="content-section fade-in">
+            <h2>Pendidikan</h2>
+            <div class="content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Harvard University</h3>
+                        <div class="position">S1 Computer Science</div>
+                        <div class="year">2018 - 2021</div>
+                        <p>Fokus pada Software Engineering dan Mobile Development. IPK: 3.90/4.00. Aktif dalam organisasi HMTI dan berbagai kompetisi programming.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>SMAN 2 TAMBUN SELATAN</h3>
+                        <div class="position">Jurusan Teknik</div>
+                        <div class="year">2015 - 2018</div>
+                        <p>Lulusan terbaik dengan rata-rata 92. Aktif dalam ekstrakurikuler robotika.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section">
+        <div class="content-section fade-in">
+            <h2>Sertifikat & Prestasi</h2>
+            <div class="content">
+                <div class="certificates-grid">
+                    <div class="certificate-item" data-certificate="google-flutter">
+                        <div class="certificate-badge">Verified</div>
+                        <h3><i class="fas fa-certificate"></i> Google Developer Expert - Flutter</h3>
+                        <p>Sertifikasi dari Google untuk keahlian dalam pengembangan aplikasi Flutter</p>
+                        <small>2017</small>
+                    </div>
+                    <div class="certificate-item" data-certificate="hackathon-winner">
+                        <div class="certificate-badge">Winner</div>
+                        <h3><i class="fas fa-trophy"></i> Juara 1 Hackathon Mobile Development</h3>
+                        <p>Kompetisi tingkat nasional dengan 200+ peserta</p>
+                        <small>2020</small>
+                    </div>
+                    <div class="certificate-item" data-certificate="aws-certified">
+                        <div class="certificate-badge">AWS</div>
+                        <h3><i class="fas fa-certificate"></i> AWS Certified Cloud Practitioner</h3>
+                        <p>Sertifikasi cloud computing dari Amazon Web Services</p>
+                        <small>2019</small>
+                    </div>
+                    <div class="certificate-item" data-certificate="meta-frontend">
+                        <div class="certificate-badge">Meta</div>
+                        <h3><i class="fas fa-certificate"></i> Meta Front-End Developer Professional</h3>
+                        <p>Program sertifikasi dari Meta melalui Coursera</p>
+                        <small>2024</small>
+                    </div>
+                    <div class="certificate-item" data-certificate="programming-competition">
+                        <div class="certificate-badge">2nd Place</div>
+                        <h3><i class="fas fa-trophy"></i> Juara 2 Programming Competition</h3>
+                        <p>Kompetisi algoritma dan struktur data tingkat universitas</p>
+                        <small>2016</small>
+                    </div>
+                    <div class="certificate-item" data-certificate="dicoding-android">
+                        <div class="certificate-badge">Expert</div>
+                        <h3><i class="fas fa-certificate"></i> Dicoding Expert Android Developer</h3>
+                        <p>Sertifikasi pengembangan aplikasi Android dari Dicoding</p>
+                        <small>2022</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Sertifikat</div>
+                <button class="close-modal">&times;</button>
+            </div>
+            <img id="modalImage" src="" alt="Certificate" class="modal-image">
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="content-section fade-in">
+            <h2>Testimoni</h2>
+            <div class="content">
+                <div class="testimonials-content">
+                    <div class="testimonial">
+                        <p>"Programmer yang sangat kompeten dan dedikasi tinggi. Selalu memberikan hasil yang melampaui ekspektasi dan tepat waktu dalam pengerjaan proyek. Kemampuan problem solving yang luar biasa."</p>
+                        <div class="testimonial-author">Dr. Stuart M. Shieber  - Dosen Pembimbing</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Sangat profesional dalam mengembangkan aplikasi mobile kami. Komunikasi lancar, dokumentasi lengkap, dan hasil akhir sesuai dengan requirement yang diminta. Highly recommended!"</p>
+                        <div class="testimonial-author">Sarah Chen - CEO Startup Edukasi Indonesia</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Kerja sama yang sangat baik, mampu bekerja dalam tim dan selalu memberikan solusi inovatif untuk setiap permasalahan teknis. Attitude yang positif dan mudah diajak diskusi. Serta memecahkan banyak masalah dalam situasi genting."</p>
+                        <div class="testimonial-author">Letnan Jenderal Keith B. Alexander - Direktur NSA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="content-section fade-in">
+            <h2>Hubungi Saya</h2>
+            <div class="content">
+                <div class="contact-info">
+                    <a href="aditiathegreat@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>aditiathegreat@gmail.com</p>
+                    </a>
+                    <a href="https://www.linkedin.com/in/aditia-dwi-irawan-792994292/" target="_blank" class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <h3>LinkedIn</h3>
+                        <p>linkedin.com/in/Aditia Dwi Irawan</p>
+                    </a>
+                    <a href="https://github.com/NE0ND" target="_blank" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <h3>GitHub</h3>
+                        <p>github.com/NE0ND</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Certificate modal functionality
+        const certificateImages = {
+            'google-flutter': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEKrhyZ8zYccJOaIfDxeRNs1gAu6yDrnyDIeDzPxgfUn57QqncHzYIKy4&s',
+            'hackathon-winner': 'https://via.placeholder.com/800x600/FFD700/000000?text=Hackathon+Winner+Certificate+2024',
+            'aws-certified': 'https://via.placeholder.com/800x600/FF9900/ffffff?text=AWS+Certified+Cloud+Practitioner',
+            'meta-frontend': 'https://via.placeholder.com/800x600/1877F2/ffffff?text=Meta+Frontend+Developer+Certificate',
+            'programming-competition': 'https://via.placeholder.com/800x600/C0C0C0/000000?text=Programming+Competition+2nd+Place',
+            'dicoding-android': 'https://via.placeholder.com/800x600/6C5CE7/ffffff?text=Dicoding+Expert+Android+Certificate'
+        };
+
+        // Handle certificate clicks
+        document.querySelectorAll('.certificate-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const certificateId = this.getAttribute('data-certificate');
+                const certificateTitle = this.querySelector('h3').textContent;
+                const certificateImage = certificateImages[certificateId];
+                
+                if (certificateImage) {
+                    const modal = document.getElementById('certificateModal');
+                    const modalTitle = modal.querySelector('.modal-title');
+                    const modalImage = document.getElementById('modalImage');
+                    
+                    modalTitle.textContent = certificateTitle;
+                    modalImage.src = certificateImage;
+                    modalImage.alt = certificateTitle;
+                    
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                }
+            });
+        });
+
+        // Close modal functionality
+        function closeModal() {
+            const modal = document.getElementById('certificateModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking close button
+        document.querySelector('.close-modal').addEventListener('click', closeModal);
+
+        // Close modal when clicking outside the content
+        document.getElementById('certificateModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Typing effect for hero title (optional enhancement)
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Apply typing effect on page load
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            setTimeout(() => {
+                typeWriter(heroTitle, originalText, 100);
+            }, 1000);
+        });
+
+        // Skill items hover effect
+        document.querySelectorAll('.skill-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Project cards hover effect enhancement
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Contact form submission (if you add a contact form later)
+        function handleContactForm(event) {
+            event.preventDefault();
+            // Add your form handling logic here
+            alert('Terima kasih! Pesan Anda telah dikirim.');
+        }
+
+        // Add scroll to top button
+        const scrollTopBtn = document.createElement('button');
+        scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        scrollTopBtn.className = 'scroll-top-btn';
+        scrollTopBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        `;
+
+        document.body.appendChild(scrollTopBtn);
+
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.style.opacity = '1';
+                scrollTopBtn.style.visibility = 'visible';
+                scrollTopBtn.style.transform = 'translateY(0)';
+            } else {
+                scrollTopBtn.style.opacity = '0';
+                scrollTopBtn.style.visibility = 'hidden';
+                scrollTopBtn.style.transform = 'translateY(10px)';
+            }
+        });
+
+        // Scroll to top functionality
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Force maintain fixed position
+            scrollTopBtn.style.position = 'fixed';
+            scrollTopBtn.style.bottom = '20px';
+            scrollTopBtn.style.right = '20px';
+            scrollTopBtn.style.zIndex = '1000';
+            
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add hover effect to scroll top button
+        scrollTopBtn.addEventListener('mouseenter', function() {
+            this.style.background = '#5a6fd8';
+            this.style.transform = 'scale(1.1)';
+        });
+
+        scrollTopBtn.addEventListener('mouseleave', function() {
+            this.style.background = '#667eea';
+            this.style.transform = 'scale(1)';
+        });
+
+        // Prevent any positioning conflicts for scroll-to-top button
+        scrollTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Ensure button stays in fixed position
+            this.style.position = 'fixed';
+            this.style.bottom = '20px';
+            this.style.right = '20px';
+            
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            const loader = document.createElement('div');
+            loader.className = 'loader';
+            loader.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                transition: opacity 0.5s ease;
+            `;
+            
+            loader.innerHTML = `
+                <div style="
+                    width: 50px;
+                    height: 50px;
+                    border: 5px solid rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    border-top: 5px solid white;
+                    animation: spin 1s linear infinite;
+                "></div>
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            `;
+            
+            document.body.prepend(loader);
+            
+            // Remove loader after 2 seconds
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.remove();
+                }, 500);
+            }, 2000);
+        });
+
+        // Add click effect to buttons (excluding scroll-to-top button and contact items)
+        document.querySelectorAll('.project-links a').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Skip if this is the scroll-to-top button or contact item
+                if (this.classList.contains('scroll-top-btn') || this.classList.contains('contact-item')) {
+                    return;
+                }
+                
+                let ripple = document.createElement('span');
+                let rect = this.getBoundingClientRect();
+                let size = Math.max(rect.width, rect.height);
+                let x = e.clientX - rect.left - size / 2;
+                let y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    left: ${x}px;
+                    top: ${y}px;
+                    width: ${size}px;
+                    height: ${size}px;
+                `;
+                
+                // Only set relative positioning for non-fixed elements
+                if (this.style.position !== 'fixed') {
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                }
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation CSS
+        const rippleStyle = document .createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        console.log('Portofolio Sudah Berhasil');
+        </script>
+</body>
+</html>
